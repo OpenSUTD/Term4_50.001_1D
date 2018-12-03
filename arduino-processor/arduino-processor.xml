@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="arduino-processor" default="all">
+  
+  
+  <property file="arduino-processor.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.11" value="${jdk.home.11}/bin"/>
+  <path id="jdk.classpath.11">
+    <fileset dir="${jdk.home.11}">
+      <include name="../jdk-11!/java.base"/>
+      <include name="../jdk-11!/java.compiler"/>
+      <include name="../jdk-11!/java.datatransfer"/>
+      <include name="../jdk-11!/java.desktop"/>
+      <include name="../jdk-11!/java.instrument"/>
+      <include name="../jdk-11!/java.logging"/>
+      <include name="../jdk-11!/java.management"/>
+      <include name="../jdk-11!/java.management.rmi"/>
+      <include name="../jdk-11!/java.naming"/>
+      <include name="../jdk-11!/java.net.http"/>
+      <include name="../jdk-11!/java.prefs"/>
+      <include name="../jdk-11!/java.rmi"/>
+      <include name="../jdk-11!/java.scripting"/>
+      <include name="../jdk-11!/java.se"/>
+      <include name="../jdk-11!/java.security.jgss"/>
+      <include name="../jdk-11!/java.security.sasl"/>
+      <include name="../jdk-11!/java.smartcardio"/>
+      <include name="../jdk-11!/java.sql"/>
+      <include name="../jdk-11!/java.sql.rowset"/>
+      <include name="../jdk-11!/java.transaction.xa"/>
+      <include name="../jdk-11!/java.xml"/>
+      <include name="../jdk-11!/java.xml.crypto"/>
+      <include name="../jdk-11!/jdk.accessibility"/>
+      <include name="../jdk-11!/jdk.aot"/>
+      <include name="../jdk-11!/jdk.attach"/>
+      <include name="../jdk-11!/jdk.charsets"/>
+      <include name="../jdk-11!/jdk.compiler"/>
+      <include name="../jdk-11!/jdk.crypto.cryptoki"/>
+      <include name="../jdk-11!/jdk.crypto.ec"/>
+      <include name="../jdk-11!/jdk.crypto.mscapi"/>
+      <include name="../jdk-11!/jdk.dynalink"/>
+      <include name="../jdk-11!/jdk.editpad"/>
+      <include name="../jdk-11!/jdk.hotspot.agent"/>
+      <include name="../jdk-11!/jdk.httpserver"/>
+      <include name="../jdk-11!/jdk.internal.ed"/>
+      <include name="../jdk-11!/jdk.internal.jvmstat"/>
+      <include name="../jdk-11!/jdk.internal.le"/>
+      <include name="../jdk-11!/jdk.internal.opt"/>
+      <include name="../jdk-11!/jdk.internal.vm.ci"/>
+      <include name="../jdk-11!/jdk.internal.vm.compiler"/>
+      <include name="../jdk-11!/jdk.internal.vm.compiler.management"/>
+      <include name="../jdk-11!/jdk.jartool"/>
+      <include name="../jdk-11!/jdk.javadoc"/>
+      <include name="../jdk-11!/jdk.jcmd"/>
+      <include name="../jdk-11!/jdk.jconsole"/>
+      <include name="../jdk-11!/jdk.jdeps"/>
+      <include name="../jdk-11!/jdk.jdi"/>
+      <include name="../jdk-11!/jdk.jdwp.agent"/>
+      <include name="../jdk-11!/jdk.jfr"/>
+      <include name="../jdk-11!/jdk.jlink"/>
+      <include name="../jdk-11!/jdk.jshell"/>
+      <include name="../jdk-11!/jdk.jsobject"/>
+      <include name="../jdk-11!/jdk.jstatd"/>
+      <include name="../jdk-11!/jdk.localedata"/>
+      <include name="../jdk-11!/jdk.management"/>
+      <include name="../jdk-11!/jdk.management.agent"/>
+      <include name="../jdk-11!/jdk.management.jfr"/>
+      <include name="../jdk-11!/jdk.naming.dns"/>
+      <include name="../jdk-11!/jdk.naming.rmi"/>
+      <include name="../jdk-11!/jdk.net"/>
+      <include name="../jdk-11!/jdk.pack"/>
+      <include name="../jdk-11!/jdk.rmic"/>
+      <include name="../jdk-11!/jdk.scripting.nashorn"/>
+      <include name="../jdk-11!/jdk.scripting.nashorn.shell"/>
+      <include name="../jdk-11!/jdk.sctp"/>
+      <include name="../jdk-11!/jdk.security.auth"/>
+      <include name="../jdk-11!/jdk.security.jgss"/>
+      <include name="../jdk-11!/jdk.unsupported"/>
+      <include name="../jdk-11!/jdk.unsupported.desktop"/>
+      <include name="../jdk-11!/jdk.xml.dom"/>
+      <include name="../jdk-11!/jdk.zipfs"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.11}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.11}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.11"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.jserialcomm-2.3.0.classpath">
+    <pathelement location="${basedir}/libs/jSerialComm-2.3.0.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <fileset dir="${javac2.home}">
+      <include name="javac2.jar"/>
+      <include name="jdom.jar"/>
+      <include name="asm-all*.jar"/>
+      <include name="forms-*.jar"/>
+    </fileset>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module arduino-processor -->
+  
+  <dirname property="module.arduino-processor.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.arduino-processor" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.arduino-processor" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.arduino-processor" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.arduino-processor" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
+  
+  <property name="arduino-processor.output.dir" value="${module.arduino-processor.basedir}/out/production/arduino-processor"/>
+  <property name="arduino-processor.testoutput.dir" value="${module.arduino-processor.basedir}/out/test/arduino-processor"/>
+  
+  <path id="arduino-processor.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="arduino-processor.module.production.classpath">
+    <path refid="${module.jdk.classpath.arduino-processor}"/>
+    <path refid="library.jserialcomm-2.3.0.classpath"/>
+  </path>
+  
+  <path id="arduino-processor.runtime.production.module.classpath">
+    <pathelement location="${arduino-processor.output.dir}"/>
+    <path refid="library.jserialcomm-2.3.0.classpath"/>
+  </path>
+  
+  <path id="arduino-processor.module.classpath">
+    <path refid="${module.jdk.classpath.arduino-processor}"/>
+    <pathelement location="${arduino-processor.output.dir}"/>
+    <path refid="library.jserialcomm-2.3.0.classpath"/>
+  </path>
+  
+  <path id="arduino-processor.runtime.module.classpath">
+    <pathelement location="${arduino-processor.testoutput.dir}"/>
+    <pathelement location="${arduino-processor.output.dir}"/>
+    <path refid="library.jserialcomm-2.3.0.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.arduino-processor">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.arduino-processor">
+    <patternset refid="excluded.from.module.arduino-processor"/>
+  </patternset>
+  
+  <path id="arduino-processor.module.sourcepath">
+    <dirset dir="${module.arduino-processor.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.arduino-processor" depends="compile.module.arduino-processor.production,compile.module.arduino-processor.tests" description="Compile module arduino-processor"/>
+  
+  <target name="compile.module.arduino-processor.production" depends="register.custom.compilers" description="Compile module arduino-processor; production classes">
+    <mkdir dir="${arduino-processor.output.dir}"/>
+    <javac2 destdir="${arduino-processor.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.arduino-processor}/javac">
+      <compilerarg line="${compiler.args.arduino-processor}"/>
+      <bootclasspath refid="arduino-processor.module.bootclasspath"/>
+      <classpath refid="arduino-processor.module.production.classpath"/>
+      <src refid="arduino-processor.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.arduino-processor"/>
+    </javac2>
+    
+    <copy todir="${arduino-processor.output.dir}">
+      <fileset dir="${module.arduino-processor.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.arduino-processor.tests" depends="register.custom.compilers,compile.module.arduino-processor.production" description="compile module arduino-processor; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.arduino-processor" description="cleanup module">
+    <delete dir="${arduino-processor.output.dir}"/>
+    <delete dir="${arduino-processor.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.arduino-processor" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.arduino-processor" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+</project>
