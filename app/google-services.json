@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "170020445993",
+    "firebase_url": "https://d-test-3e4d2.firebaseio.com",
+    "project_id": "d-test-3e4d2",
+    "storage_bucket": "d-test-3e4d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170020445993:android:8f20d6412939f67e",
+        "android_client_info": {
+          "package_name": "com.example.zifang.a3dprintermate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "170020445993-q8746ke8nij5mgvcpdmif5e2168lgr4d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.zifang.a3dprintermate",
+            "certificate_hash": "df203c37de708d0d19409858603e8c7f2b3b9083"
+          }
+        },
+        {
+          "client_id": "170020445993-75tr0sd57iq1v54phn4kt2ard2v499ml.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7fb-YCQ4BCQwiQmnFL_sucukEm_kbBNw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "170020445993-75tr0sd57iq1v54phn4kt2ard2v499ml.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
