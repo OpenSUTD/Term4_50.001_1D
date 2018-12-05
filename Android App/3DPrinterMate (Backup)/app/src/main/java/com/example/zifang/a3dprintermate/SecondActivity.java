@@ -104,12 +104,17 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
         startActivity(intent);
     }
 
+    public void tothird(){
+        Intent intent = new Intent(this, ThirdActivity.class);
+        intent.putExtra(getString(R.string.intent_key_printerIndex),printerIndex);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
             case R.id.nav_photo:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CameraFragment()).commit();
+                tothird();
                 break;
             case R.id.nav_logout:
                 backtomain();

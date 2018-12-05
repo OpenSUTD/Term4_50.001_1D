@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "170020445993-11pdvcpdo3l0g0ljken6jp9qnan1aq65.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.zifang.a3dprintermate",
+            "certificate_hash": "5ffd4566a3437a4cc655558dccad0f556f3113d7"
+          }
+        },
+        {
           "client_id": "170020445993-75tr0sd57iq1v54phn4kt2ard2v499ml.apps.googleusercontent.com",
           "client_type": 3
         }
