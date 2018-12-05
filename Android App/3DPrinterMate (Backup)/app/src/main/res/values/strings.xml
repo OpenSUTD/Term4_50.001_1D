@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">3DPrinterMate</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="intent_key_printerIndex">3D printer used</string> <!-- Used as key for extra data tied with intents that represents the index of 3D  printer -->
 </resources>
