@@ -50,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Name = (EditText) findViewById(R.id.etPrinter);
-        Info = (TextView) findViewById(R.id.Info);
-        Login = (Button) findViewById(R.id.btnLogin);
+        Name = findViewById(R.id.etPrinter);
+        Info = findViewById(R.id.Info);
+        Login = findViewById(R.id.btnLogin);
         Info.setText("No. of attemps remaining: 5");
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
