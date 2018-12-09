@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component inherit-compiler-output="true" jdk="10" jdk_type="JavaSDK">
+<component inherit-compiler-output="true" jdk="11" jdk_type="JavaSDK">
 	<output-test url="file://$MODULE_DIR$/out/test/arduino-processor"/>
 	<exclude-output/>
 	<contentEntry url="file://$MODULE_DIR$"/>
 	<lib name="jSerialComm-2.3.0.jar" scope="COMPILE">
 		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/jSerialComm-2.3.0.jar!/"/>
 	</lib>
-	<levels>
-		<level name="jSerialComm-2.3.0" value="project"/>
-		<level name="webcam-capture-0.3.10" value="project"/>
-		<level name="webcam-capture-0.3.10 (2)" value="project"/>
-		<level name="json-simple-1.1.1" value="project"/>
-	</levels>
+	<lib name="json-simple-1.1.1.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/json-simple-1.1.1.jar!/"/>
+	</lib>
+	<lib name="webcam-capture-0.3.10.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/webcam-capture-0.3.10.jar!/"/>
+	</lib>
 </component>

@@ -1,30 +1,28 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.fazecast.jSerialComm.*;
-
 import javax.imageio.ImageIO;
 import javax.print.DocFlavor;
 
 public class DatabaseProcessor {
-    private static final String USB_PORT_NAME = "/dev/ttyUSB0";
-    private static int BAUD_RATE;
+    static {
+        int BAUD_RATE;
+    }
+
+    static final String USB_PORT_NAME = "/dev/ttyUSB0";
     // PORT READOUTS
-    public static InputStream inputStream;
-    public static SerialPort serialPort;
+    private static String dataReadin = "/home/pi/Desktop/received.txt";
+    public static FileInputStream inputStream;
     private static byte[] buffer = new byte[256];
+
     // TIMER FOR SCHEDULER
-    private static Timer threadTimer = new Timer("ScheduleWrite", true);
-    private static int delayMilliseconds = 5000;
+    private static Timer threadTimer = new Timer("ScheduleWrite");
+    private static int delayMilliseconds = 10000;
 
     // CAMERA AND CAMERA DATA
     private static Javacam camera;
@@ -43,8 +41,8 @@ public class DatabaseProcessor {
         TimerTask update = new TimerTask() {
             @Override
             public void run() {
-                System.out.print("Reading sensor data...");
-                readPortsForSensorData();
+                System.out.print("Reading sensor data.");
+                readFileForSensorData();
                 System.out.print("Done. Acquiring Photo.");
                 getPhoto();
                 System.out.println("Photo acquired.");
@@ -74,14 +72,33 @@ public class DatabaseProcessor {
         System.out.println("Data Collection and update Daemon started.");
     }
 
-    private static void readPortsForSensorData(){
-        if(!serialPort.isOpen()) {
-            serialPort.openPort();
-        } do {
-            inputStream = serialPort.getInputStream();
-            data = readInputStreamForString(inputStream).split("\n");
-        } while(serialPort.isOpen());
-        serialPort.closePort();
+    private static void readFileForSensorData(){
+        File textFile = new File(dataReadin);
+        System.out.print(".");
+        try {
+            inputStream = new FileInputStream(textFile);
+            System.out.print(".");
+            String unsplit = readInputStreamForString(inputStream);
+            System.out.print(".");
+            System.out.print(unsplit);
+            data = unsplit.split("\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static String readInputStreamForString(InputStream stream){
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        try{
+            int length;
+            while ( (length = stream.read(buffer)) != -1){
+                result.write(buffer, 0, length);
+            }
+            return result.toString();
+        } catch (Exception k){
+            k.printStackTrace();
+            return null;
+        }
     }
 
     private static void getPhoto(){
@@ -100,6 +117,11 @@ public class DatabaseProcessor {
 
     private static void uploadToDB(){
         database = Javabase.getJavabase();
+        try{
+            database.openConnection();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         System.out.print(".");
         database.postData(payload);
         System.out.print(".");
@@ -110,18 +132,22 @@ public class DatabaseProcessor {
     static HashMap<String, HashMap<String, String>> generateMapFromString(String[] data){
         HashMap<String, String> subtable = new HashMap<>();
         for (String substring : data){
-            String[] keyvalue = substring.split( " = ");
-            subtable.put(keyvalue[0], keyvalue[1]);
-            if (keyvalue[0] == "SRF05"){
-                changes[0] = !prevdataXaxis.equals(keyvalue[1]);
-                prevdataXaxis = keyvalue[1];
-            }
-            if (keyvalue[0] == "SR04"){
-                changes[1] = !prevdataYaxis.equals(keyvalue[1]);
-                prevdataYaxis = keyvalue[1];
-            }
-            if (keyvalue[0] == "RPM"){
-                changes[2] = Integer.getInteger(keyvalue[1]) > 0;
+            if (substring.isEmpty() || substring.equals(" ")){
+                continue;
+            } else {
+                String[] keyvalue = substring.split("=");
+                subtable.put(keyvalue[0], keyvalue[1]);
+                if (keyvalue[0] == "SRF05"){
+                    changes[0] = !prevdataXaxis.equals(keyvalue[1]);
+                    prevdataXaxis = keyvalue[1];
+                }
+                if (keyvalue[0] == "SR04"){
+                    changes[1] = !prevdataYaxis.equals(keyvalue[1]);
+                    prevdataYaxis = keyvalue[1];
+                }
+                if (keyvalue[0] == "RPM"){
+                    changes[2] = Integer.getInteger(keyvalue[1]) > 0;
+                }
             }
         }
         System.out.print(".");
@@ -139,34 +165,17 @@ public class DatabaseProcessor {
         return output;
     }
 
-    public static String readInputStreamForString(InputStream stream){
-        ByteArrayOutputStream result = new ByteArrayOutputStream();
-        try{
-            int length;
-            while ( (length = stream.read(buffer)) != -1){
-                result.write(buffer,0, length);
-            }
-            return result.toString();
-        } catch (Exception k){
-            k.printStackTrace();
-            return null;
-        }
-    }
+
 
     public static void main(String[] args){
         try {
             camera = Javacam.getJavacam();
-            serialPort = SerialPort.getCommPort(USB_PORT_NAME);
-            System.out.println("Comm Port Successfully connected.");
-            BAUD_RATE = serialPort.getBaudRate();
-            System.out.println("Comm Port baud rate: "+BAUD_RATE);
-            serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 4950, 0);
-            System.out.println("Comm Port settings configured.");
             scheduleTasks();
             System.out.println("Task Scheduler successfully Completed.");
         } catch (Exception e){
             e.printStackTrace();
         }
+        return;
     }
 
     /*
