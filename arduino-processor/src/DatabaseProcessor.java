@@ -22,7 +22,7 @@ public class DatabaseProcessor {
 
     // TIMER FOR SCHEDULER
     private static Timer threadTimer = new Timer("ScheduleWrite");
-    private static int delayMilliseconds = 10000;
+    private static long delayMilliseconds = 30000;
 
     // CAMERA AND CAMERA DATA
     private static Javacam camera;
@@ -63,6 +63,12 @@ public class DatabaseProcessor {
                 payload.put("Images", images);
                 System.out.println("Done.");
 
+                System.out.print("Attempting to open connection to database..");
+                database = Javabase.getJavabase();
+                System.out.print(".");
+                database.openConnection();
+                System.out.println("Done.");
+
                 System.out.print("Attempting upload to database.");
                 uploadToDB();
                 System.out.println("Done.");
@@ -80,7 +86,6 @@ public class DatabaseProcessor {
             System.out.print(".");
             String unsplit = readInputStreamForString(inputStream);
             System.out.print(".");
-            System.out.print(unsplit);
             data = unsplit.split("\n");
         } catch (IOException e) {
             e.printStackTrace();
@@ -116,16 +121,7 @@ public class DatabaseProcessor {
     }
 
     private static void uploadToDB(){
-        database = Javabase.getJavabase();
-        try{
-            database.openConnection();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        System.out.print(".");
         database.postData(payload);
-        System.out.print(".");
-        database.closeConnection();
         System.out.print(".");
     }
 
