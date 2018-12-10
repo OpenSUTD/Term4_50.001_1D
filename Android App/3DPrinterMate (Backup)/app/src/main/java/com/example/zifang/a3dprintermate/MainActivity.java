@@ -1,11 +1,16 @@
 package com.example.zifang.a3dprintermate;
 
+import android.app.IntentService;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.JobIntentService;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +35,8 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static java.security.AccessController.getContext;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText Name;
@@ -41,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference dr = FirebaseDatabase.getInstance().getReference();
     private HashMap firebaseAllData;  // for storing all data from root. If time permits find a way to retrieve from child node "3D Printer Index" only?
     private ArrayList printerIndexList = new ArrayList();  // for storing indices of all 3D printers
+
+    // References for data persistence
+    // Note that data persistence is for the background processes to use
+    SharedPreferences mPreferences;
+
+    // References for background intent
+    private static final int RSS_JOB_ID = 1000;
+
 
 
 
@@ -61,20 +76,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Window window = getWindow();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            window.setStatusBarColor(getColor(R.color.mystatusbar));
-        }
-        else{
-            window.setStatusBarColor(getResources().getColor(R.color.mystatusbar));
-        }
-
-        ConstraintLayout constraintLayout = findViewById(R.id.layout);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-        animationDrawable.setEnterFadeDuration(2000);
-        animationDrawable.setExitFadeDuration(4000);
-        animationDrawable.start();
-
         // Retrieving data from Firebase once
         // We retrieve all data from root, then the ArrayList that has all indices of 3D printers
         // available.
@@ -92,15 +93,53 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            window.setStatusBarColor(getColor(R.color.mystatusbar));
+        }
+        else{
+            window.setStatusBarColor(getResources().getColor(R.color.mystatusbar));
+        }
+
+        ConstraintLayout constraintLayout = findViewById(R.id.layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
+
+        // initiate shared preferences, a way to store data that last after you close the app
+        mPreferences = getSharedPreferences(getString(R.string.persistence_sharedPrefFile), MODE_PRIVATE);
+        String Rate_text = mPreferences.getString(getString(R.string.persistence_key),getString(R.string.persistence_default_value));
+
+        // if the user has not logged out, sign in the next time the application is opened
+        if (!Rate_text.equals(getString(R.string.persistence_default_value))){
+            validate(Rate_text);
+        }
     }
 
     private void validate(String username){
         // If input a string value that matches index of any 3D printer --> log in success
-        if(printerIndexList.contains(username)){
+        if (printerIndexList.contains(username)){
+
+            // saving 3D printer ID until log out
+            SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+            preferencesEditor.putString(getString(R.string.persistence_key), username);
+            preferencesEditor.apply();
+
+            // creating background intent
+            Intent mServiceIntent = new Intent(MainActivity.this, BackgroundCheckFirebase.class);
+            BackgroundCheckFirebase.listenerState = getString(R.string.background_start_state);
+            startService(mServiceIntent);
+
+
+            // creation and execution of intent
             Intent intent = new Intent(this,SecondActivity.class);
             intent.putExtra(getString(R.string.intent_key_printerIndex), username);
             startActivity(intent);
-        }else{
+
+        } else {
+
             // TO-DO: Create toast to show that wrong index has been inserted
             counter--;
 

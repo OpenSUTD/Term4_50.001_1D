@@ -3,4 +3,21 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="intent_key_printerIndex">3D printer used</string> <!-- Used as key for extra data tied with intents that represents the index of 3D  printer -->
+
+    <!-- For Firebase -->
+    <string name="printer_status_online">Online</string>
+    <string name="printer_status_stopped">Stopped</string>
+    <string name="printer_status_key">Status</string>
+    <string name="notification_title">3D Printer Mate</string>
+    <string name="notification_content">3D Printer has stopped operation</string>
+
+    <!-- For data persistence-->
+    <string name="persistence_key">MyKey</string>
+    <string name="persistence_default_value">000</string>
+    <string name="persistence_sharedPrefFile">com.example.zifang.a3dprintermate</string>
+
+    <!-- For background processes -->
+    <string name="background_intent_key">background intent key</string>
+    <string name="background_start_state">start</string>
+    <string name="background_stop_state">stop</string>
 </resources>

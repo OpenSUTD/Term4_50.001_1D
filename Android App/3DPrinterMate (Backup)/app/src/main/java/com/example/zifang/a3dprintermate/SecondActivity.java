@@ -1,8 +1,11 @@
 package com.example.zifang.a3dprintermate;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -39,6 +42,8 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
     private HashMap firebaseAllData;  // for storing all data from root. If time permits find a way to retrieve from child node "3D Printer Index" only?
     private HashMap printerData;  // for storing indices of all 3D printers
 
+    // References for data persistence
+    SharedPreferences mPreferences;
 
 
     @Override
@@ -63,14 +68,13 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
                 new MainFragment()).commit();
         navigationView.setCheckedItem(R.id.nav_main);
 
-
         // Index of 3D printer logged in is passed as intent method putExtra(). It is
         // received here
         Intent intent = getIntent();
         printerIndex = intent.getStringExtra(getString(R.string.intent_key_printerIndex));
 
         // constant listener for values for printer with index "printerIndex"
-        // note that firebase listeners bby default run in parallel with the app, so we don't
+        // note that firebase listeners by default run in parallel with the app, so we don't
         // have to put this under async task to have the listener constantly running
         dr.addValueEventListener(
                 new ValueEventListener() {
@@ -80,8 +84,9 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
                         printerData = (HashMap) firebaseAllData.get(printerIndex);
 
                         // updates status display on fragment_main2.xml
+                        String printerStatus = (String) printerData.get(getString(R.string.printer_status_key));
                         TextView statusView = findViewById(R.id.textView3);
-                        statusView.setText((String) printerData.get("Status"));
+                        statusView.setText(printerStatus);
                     }
 
                     @Override
@@ -92,7 +97,17 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
         );
     }
 
-    public void backtomain(){
+    public void backtomain(){  // when logging out
+        // resetting data persistence to clear 3D printer id
+        // saving 3D printer ID until log out
+        mPreferences = getSharedPreferences(getString(R.string.persistence_sharedPrefFile), MODE_PRIVATE);
+        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+        preferencesEditor.putString(getString(R.string.persistence_key), getString(R.string.persistence_default_value));
+        preferencesEditor.apply();
+
+        // stopping background activity
+        BackgroundCheckFirebase.listenerState = getString(R.string.background_stop_state);
+
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(getString(R.string.intent_key_printerIndex),printerIndex);
         startActivity(intent);
