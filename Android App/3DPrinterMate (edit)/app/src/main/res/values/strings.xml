@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">3DPrinterMate</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="intent_key_printerIndex">3D printer used</string> <!-- Used as key for extra data tied with intents that represents the index of 3D  printer -->
+
+    <!-- For Firebase connection -->
+    <string name="printer_status_online">Online</string>
+    <string name="printer_status_stopped">Stopped</string>
+    <string name="printer_status_key">Status</string>
+    <string name="notification_title">3D Printer Mate</string>
+    <string name="notification_content">3D Printer has stopped operation</string>
+
+    <!-- For data persistence-->
+    <string name="persistence_key">printer index login</string>
+    <string name="persistence_default_value">000</string>
+    <string name="persistence_sharedPrefFile">com.example.zifang.a3dprintermate</string>
+
+    <!-- For data persistence and firebase json parsing-->
+    <string name="json_key_status">status</string>
+    <string name="json_key_bitmap_data">bitmap data</string>
+    <string name="json_key_index_array">index array</string>
+    <string name="json_default_value">Null</string>
+
+    <!-- For background processes -->
+    <string name="background_intent_key">background intent key</string>
+    <string name="background_start_state">start</string>
+    <string name="background_stop_state">stop</string>
+
+    <!-- For background processes message bundles -->
+    <string name="background_bundle_status">background bundle status</string>
+</resources>
