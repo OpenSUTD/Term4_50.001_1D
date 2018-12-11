@@ -9,7 +9,7 @@ public class Javacam {
     private static Runtime imgCapture;
     private static BufferedImage image;
     private static String cmd = "fswebcam --no-timestamp --no-underlay --no-banner -S 20 image.jpg -r 1028x768";
-    private static String filePath = "/home/pi/image.jpg";
+    private static String filePath = "/home/pi/Desktop/arduino-processor/build/image.jpg";
 
     private Javacam(){imgCapture = Runtime.getRuntime();}
 
