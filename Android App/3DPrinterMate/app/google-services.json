@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "170020445993",
-    "firebase_url": "https://d-test-3e4d2.firebaseio.com",
-    "project_id": "d-test-3e4d2",
-    "storage_bucket": "d-test-3e4d2.appspot.com"
+    "project_number": "965318053502",
+    "firebase_url": "https://d-guian.firebaseio.com",
+    "project_id": "d-guian",
+    "storage_bucket": "d-guian.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:170020445993:android:8f20d6412939f67e",
+        "mobilesdk_app_id": "1:965318053502:android:8f20d6412939f67e",
         "android_client_info": {
           "package_name": "com.example.zifang.a3dprintermate"
         }
       },
       "oauth_client": [
         {
-          "client_id": "170020445993-q8746ke8nij5mgvcpdmif5e2168lgr4d.apps.googleusercontent.com",
+          "client_id": "965318053502-hvahc2so2kfg6ghc4diqcdp9thf6u195.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.zifang.a3dprintermate",
@@ -23,21 +23,13 @@
           }
         },
         {
-          "client_id": "170020445993-11pdvcpdo3l0g0ljken6jp9qnan1aq65.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.zifang.a3dprintermate",
-            "certificate_hash": "5ffd4566a3437a4cc655558dccad0f556f3113d7"
-          }
-        },
-        {
-          "client_id": "170020445993-75tr0sd57iq1v54phn4kt2ard2v499ml.apps.googleusercontent.com",
+          "client_id": "965318053502-l6d9jlo8fnkqda14p76tabss8cr8mbcv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB7fb-YCQ4BCQwiQmnFL_sucukEm_kbBNw"
+          "current_key": "AIzaSyB9NyaHcDBhu5zz-ia5NfKWuwryK6XbrDU"
         }
       ],
       "services": {
@@ -48,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "170020445993-75tr0sd57iq1v54phn4kt2ard2v499ml.apps.googleusercontent.com",
+              "client_id": "965318053502-l6d9jlo8fnkqda14p76tabss8cr8mbcv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

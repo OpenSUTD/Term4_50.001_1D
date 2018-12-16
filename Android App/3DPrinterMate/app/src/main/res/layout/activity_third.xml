@@ -28,11 +28,6 @@
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:id="@+id/imgView"/>
-        <!--<Button-->
-            <!--android:layout_width="300dp"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:text="Get me my picture"-->
-            <!--android:id="@+id/picturebtn"/>-->
 
         <FrameLayout
             android:id="@+id/fragment_container2"

@@ -8,6 +8,7 @@ import android.view.View;
 import gr.net.maroulis.library.EasySplashScreen;
 
 public class SplashScreenActivity extends AppCompatActivity {
+    // loading screen before the log-in page
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
