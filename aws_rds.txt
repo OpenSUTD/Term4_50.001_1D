@@ -1,0 +1,98 @@
+AWS RDS - 50.001
+LOG FOR USING AWS RDS
+
+-Tutorials followed-
+- Creating aws rds instance
+https://aws.amazon.com/getting-started/tutorials/create-connect-postgresql-db/ 
+- Installing postgresql
+https://wiki.postgresql.org/wiki/Apt 
+- Connecting to aws rds through cmd (not needed, just use psql)
+https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.PostgreSQL.html 
+https://www.youtube.com/watch?v=FwbavIglhis  (creating aws cli access keys)
+- postgresql tutorial
+https://www.youtube.com/watch?v=xaWlS9HtWYw 
+
+
+
+-Connecting to aws rds through SQL Workbench-
+java -jar -Xmx4g ~/Downloads/SQL\ Workbench/sqlworkbench.jar
+https://aws.amazon.com/getting-started/tutorials/create-connect-postgresql-db/ 
+
+
+
+
+-Using psql to connect to database-
+psql --host=hostName --port=portNumber --username=userName --password --dbname=dbname
+where:
+---host – The host name of the DB instance that you want to access.
+---port – The port number used for connecting to your DB instance.
+---dbname – The database that you want to access.
+---username – The database account that you want to access.
+(they'll prompt us with the password which we then enter)
+Cheatsheet for psql: 
+http://postgresguide.com/utilities/psql.html#commonly-used-commands 
+
+
+
+- Creating roles (users to our db) -
+postgres=> create role testuser with password 'testuser' login;   
+postgres=> grant rds_superuser to testuser;   
+https://stackoverflow.com/questions/47249546/amazon-rds-postgresql-how-to-create-user 
+https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.html#Appendix.PostgreSQL.CommonDBATasks.Roles 
+
+
+
+-PostgreSQL Cheatsheet-
+- To create new table:
+CREATE TABLE table_name(
+  column_name1 DATATYPE1,
+  column_name2 DATATYPE2
+)
+
+- To drop a table (delete table)
+DROP TABLE table_name
+
+- To insert new value
+INSERT INTO table_name (column_namex, column_namey) VALUES (datax, datay)
+
+- Retrieve data using SELECT
+SELECT column_name1 FROM table_name;
+# returns all data from column_name1 from table_name. column_name1 can be replaced with * to return all column data
+
+- Conditions when selecting data
+SELECT column_name2 FROM table_name
+WHERE column_name1 = data1
+AND column_name3 = data3;
+
+- Ordering returned value
+SELECT * FROM table_name
+WHERE column_name2 < data
+ORDER BY column_name1;
+# return data ordered ascending order using data column_name1
+# if we want to return in descending order, replace last line with 'ORDER BY column_name1 desc;'
+
+- Update records
+# good practice to run SELECT first to make sure that's the data we're looking for
+UPDATE test_table
+SET column_name1 = data1
+WHERE [conditions]
+
+- Delete records
+# good practice to run SELECT first to make sure that's the data we're looking for
+DELETE test_table
+WHERE [conditions]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
