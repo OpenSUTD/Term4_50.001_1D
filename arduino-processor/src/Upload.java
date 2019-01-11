@@ -9,7 +9,7 @@ import java.util.TimerTask;
 import javax.imageio.ImageIO;
 import javax.print.DocFlavor;
 
-public class DatabaseProcessor {
+public class Upload {
     static {
         int BAUD_RATE;
     }
@@ -34,8 +34,8 @@ public class DatabaseProcessor {
     private static Javabase database;
     private static String[] data;
     private static HashMap<String, HashMap<String, String>> payload;
-    private static String prevdataYaxis;
-    private static String prevdataXaxis;
+    private static double prevdataYaxis;
+    private static double prevdataXaxis;
     static boolean rpm = false;
     static boolean x = false;
     static boolean y = false;
@@ -63,6 +63,7 @@ public class DatabaseProcessor {
                 HashMap<String, String> index = new HashMap<>();
                 System.out.print(".");
 
+                // Add more 3d printers here
                 index.put("0", "001");
                 System.out.print(".");
 
@@ -72,7 +73,7 @@ public class DatabaseProcessor {
                 System.out.print("Attempting to open connection to database..");
                 database = Javabase.getJavabase();
                 System.out.print(".");
-                database.openConnection();
+                Javabase.openConnection();
                 System.out.println("Done.");
 
                 System.out.print("Attempting upload to database.");
