@@ -1,6 +1,5 @@
-# README
-3D Printer Mate
-3D printing jobs continue to have a high rate of failure. Until technology can minimise such occurrences, the uncertainty of a successful printing job continues to led to inefficient usage of resources by multiple stakeholders. Our team recognises and attempts to eliminate this uncertainty by creating an app that notifies users whenever the 3D printer stops moving, and provides updated images of the print to verify if the printing has failed or not.
+# 3D Printer Mate - README
+3D printing jobs continue to have a high rate of failure. Until technology can minimise such occurrences, the uncertainty of a successful printing job continues to led to inefficient usage of resources by multiple stakeholders. Our team recognises and attempts to eliminate this uncertainty by creating an app that notifies users whenever the 3D printer stops moving, and provides updated images of the print to verify the success of the print.
 
 
 ------
