@@ -1,4 +1,8 @@
 # README
+3D Printer Mate
+3D printing jobs continue to have a high rate of failure. Until technology can minimise such occurrences, the uncertainty of a successful printing job continues to led to inefficient usage of resources by multiple stakeholders. Our team recognises and attempts to eliminate this uncertainty by creating an app that notifies users whenever the 3D printer stops moving, and provides updated images of the print to verify if the printing has failed or not.
+
+
 ------
 ### Android App set-up:
 * The application has to be authorised to access the Firebase Database to retrieve values from it. To do so you have to add the SHA1 key of the android app into Firebase.
